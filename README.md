@@ -1,5 +1,7 @@
 # Sum. — Summarize AI videos on YouTube
 
+<img width="382" height="150" alt="Zasób 8@1024" src="https://github.com/user-attachments/assets/f17f8319-a588-4e1f-a0b5-1867ad1870c0" />
+
 A lightweight Chromium / Opera GX (Manifest V3) extension that adds a native-looking
 **Summarize** button to the YouTube action bar and renders a structured, AI-generated
 summary of the video's transcript in an injected side panel. You can also ask
@@ -7,6 +9,8 @@ follow-up questions grounded in the transcript.
 
 Bring your own API key — the extension talks **directly** to the AI provider you
 choose. There is no middle-man server, no account, and no telemetry.
+
+<img width="2547" height="1426" alt="google-view-yut-sum" src="https://github.com/user-attachments/assets/1e902ae0-9ad9-4d54-94a5-16f2041a30c9" />
 
 ## Features
 
