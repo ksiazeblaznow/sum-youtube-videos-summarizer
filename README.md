@@ -47,6 +47,8 @@ restricting your cloud key (referrer / app limits) in the provider's console.
 4. Click **Load unpacked** and select this folder.
 5. Open any YouTube watch page and click **Summarize**.
 
+The extension is not yet published on Chrome Web Store or others.
+
 ## How it works
 
 Standard MV3 split. The **service worker is the only component that touches API
@@ -80,5 +82,4 @@ your own key. See [PRIVACY.md](./PRIVACY.md).
 Free to use, modify, and share for **noncommercial** purposes — personal use,
 hobby projects, education, research, nonprofits, and government are all permitted.
 **Commercial use is not granted** (you may not sell it, or use it for commercial
-advantage, without separate permission). The extension itself is free to install
-on the Chrome Web Store; this license governs the source code.
+advantage, without separate permission).
