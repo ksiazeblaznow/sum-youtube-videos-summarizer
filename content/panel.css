@@ -1,0 +1,170 @@
+/* All rules scoped under #ytsum-panel to avoid leaking into / inheriting from YouTube. */
+
+#ytsum-panel {
+  position: fixed;
+  top: 64px;
+  right: -440px;
+  width: 400px;
+  max-width: 92vw;
+  height: calc(100vh - 88px);
+  background: #0f0f0f;
+  color: #f1f1f1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  z-index: 2147483000;
+  font-family: Roboto, Arial, sans-serif;
+  transition: right 0.25s ease;
+  overflow: hidden;
+}
+
+#ytsum-panel.ytsum-visible { right: 16px; }
+
+#ytsum-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex: 0 0 auto;
+}
+
+#ytsum-title { font-size: 15px; font-weight: 600; }
+
+#ytsum-actions { display: flex; gap: 4px; }
+
+#ytsum-panel .ytsum-iconbtn {
+  background: transparent;
+  color: #f1f1f1;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+#ytsum-panel .ytsum-iconbtn:hover { background: rgba(255, 255, 255, 0.12); }
+
+#ytsum-body {
+  padding: 14px 16px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#ytsum-panel .ytsum-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #aaa;
+  padding-top: 24px;
+}
+#ytsum-panel .ytsum-error { color: #f0a8a8; align-items: flex-start; }
+
+#ytsum-panel .ytsum-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #f1f1f1;
+  border-radius: 50%;
+  animation: ytsum-spin 0.8s linear infinite;
+  flex: 0 0 auto;
+}
+@keyframes ytsum-spin { to { transform: rotate(360deg); } }
+
+#ytsum-panel :is(.ytsum-result, .ytsum-a) h1,
+#ytsum-panel :is(.ytsum-result, .ytsum-a) h2,
+#ytsum-panel :is(.ytsum-result, .ytsum-a) h3 { font-size: 15px; margin: 14px 0 6px; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) p { margin: 8px 0; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) ul,
+#ytsum-panel :is(.ytsum-result, .ytsum-a) ol { margin: 8px 0; padding-left: 22px; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) li { margin: 4px 0; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+}
+#ytsum-panel :is(.ytsum-result, .ytsum-a) pre {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+#ytsum-panel :is(.ytsum-result, .ytsum-a) pre code { background: none; padding: 0; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) a { color: #3ea6ff; }
+#ytsum-panel :is(.ytsum-result, .ytsum-a) blockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  margin: 8px 0;
+  padding-left: 10px;
+  color: #c9c9c9;
+}
+
+/* Q&A thread */
+#ytsum-panel .ytsum-qa-item {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+#ytsum-panel .ytsum-q {
+  font-weight: 600;
+  color: #3ea6ff;
+  margin-bottom: 6px;
+}
+#ytsum-panel .ytsum-q::before { content: "❯ "; }
+#ytsum-panel .ytsum-a.ytsum-pending { color: #aaa; }
+#ytsum-panel .ytsum-a.ytsum-error { color: #f0a8a8; }
+
+/* Ask bar (footer) */
+#ytsum-ask {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex: 0 0 auto;
+}
+#ytsum-ask[hidden] { display: none; }
+#ytsum-ask-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f1f1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: Roboto, Arial, sans-serif;
+}
+#ytsum-ask-input:focus { outline: none; border-color: #3ea6ff; }
+#ytsum-panel #ytsum-ask-send { background: #3ea6ff; color: #0f0f0f; flex: 0 0 auto; }
+#ytsum-panel #ytsum-ask-send:hover { background: #5cb3ff; }
+#ytsum-ask-input:disabled, #ytsum-panel #ytsum-ask-send:disabled { opacity: 0.55; cursor: default; }
+
+/* The injected action-bar button */
+#ytsum-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  padding: 0 16px;
+  height: 40px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 40px;
+  cursor: pointer;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s;
+}
+#ytsum-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+#ytsum-btn:disabled { opacity: 0.7; cursor: default; }

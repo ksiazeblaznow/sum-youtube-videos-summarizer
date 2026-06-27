@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>YT Summarizer</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1 data-i18n="opt.title">YT Summarizer</h1>
+
+    <label data-i18n="opt.backend">AI backend</label>
+    <select id="backend">
+      <option value="localhost" data-i18n="opt.backendLocalhost">Local (LM Studio)</option>
+      <option value="gemini" data-i18n="opt.backendGemini">Cloud (Google Gemini)</option>
+      <option value="anthropic" data-i18n="opt.backendAnthropic">Cloud (Anthropic Claude)</option>
+      <option value="openai" data-i18n="opt.backendOpenai">Cloud (OpenAI ChatGPT)</option>
+      <option value="openrouter" data-i18n="opt.backendOpenrouter">Cloud (OpenRouter)</option>
+    </select>
+
+    <fieldset id="group-gemini">
+      <label data-i18n="opt.geminiKey">Gemini API key</label>
+      <div class="row">
+        <input type="password" id="geminiApiKey" placeholder="AIza...">
+        <button type="button" id="toggleKey" class="ghost">👁</button>
+      </div>
+      <p class="hint" data-i18n="opt.keyHint"></p>
+      <label data-i18n="opt.geminiModel">Gemini model</label>
+      <input type="text" id="geminiModel" placeholder="gemini-2.5-flash">
+    </fieldset>
+
+    <fieldset id="group-anthropic">
+      <label data-i18n="opt.anthropicKey">Anthropic API key</label>
+      <div class="row">
+        <input type="password" id="anthropicApiKey" placeholder="sk-ant-...">
+        <button type="button" id="toggleKeyAn" class="ghost">👁</button>
+      </div>
+      <p class="hint" data-i18n="opt.keyHint"></p>
+      <label data-i18n="opt.anthropicModel">Anthropic model</label>
+      <input type="text" id="anthropicModel" placeholder="claude-sonnet-4-6">
+    </fieldset>
+
+    <fieldset id="group-openai">
+      <label data-i18n="opt.openaiKey">OpenAI API key</label>
+      <div class="row">
+        <input type="password" id="openaiApiKey" placeholder="sk-...">
+        <button type="button" id="toggleKeyOa" class="ghost">👁</button>
+      </div>
+      <p class="hint" data-i18n="opt.keyHint"></p>
+      <label data-i18n="opt.openaiModel">OpenAI model</label>
+      <input type="text" id="openaiModel" placeholder="gpt-4o-mini">
+    </fieldset>
+
+    <fieldset id="group-openrouter">
+      <label data-i18n="opt.openrouterKey">OpenRouter API key</label>
+      <div class="row">
+        <input type="password" id="openrouterApiKey" placeholder="sk-or-...">
+        <button type="button" id="toggleKeyOr" class="ghost">👁</button>
+      </div>
+      <p class="hint" data-i18n="opt.keyHint"></p>
+      <label data-i18n="opt.openrouterModel">OpenRouter model</label>
+      <input type="text" id="openrouterModel" placeholder="google/gemini-2.0-flash-exp:free">
+      <p class="hint" data-i18n="opt.openrouterHint"></p>
+    </fieldset>
+
+    <fieldset id="group-localhost">
+      <label data-i18n="opt.localhostUrl">Server base URL</label>
+      <input type="text" id="localhostBaseUrl" placeholder="http://localhost:1234/v1">
+      <label data-i18n="opt.localhostModel">Model name</label>
+      <input type="text" id="localhostModel" placeholder="local-model">
+      <label class="checkbox-row">
+        <input type="checkbox" id="localhostDisableThinking">
+        <span data-i18n="opt.disableThinking">Disable thinking / reasoning</span>
+      </label>
+    </fieldset>
+
+    <label data-i18n="opt.language">Summary language</label>
+    <select id="language">
+      <option value="pl">Polski</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="it">Italiano</option>
+      <option value="uk">Українська</option>
+      <option value="pt">Português</option>
+      <option value="ru">Русский</option>
+      <option value="ja">日本語</option>
+    </select>
+
+    <label data-i18n="opt.wordLimit">Soft word limit</label>
+    <input type="number" id="wordLimit" min="50" max="800" step="10" value="150">
+
+    <div class="row between">
+      <label data-i18n="opt.systemPrompt">System prompt</label>
+      <button type="button" id="resetPrompt" class="ghost" data-i18n="opt.reset">Reset</button>
+    </div>
+    <textarea id="systemPrompt" rows="7" placeholder=""></textarea>
+    <p class="hint" data-i18n="opt.promptHint"></p>
+
+    <div class="actions">
+      <button type="button" id="save" data-i18n="opt.save">Save</button>
+      <button type="button" id="test" class="secondary" data-i18n="opt.test">Test connection</button>
+      <span id="status"></span>
+    </div>
+  </div>
+
+  <script src="../lib/markdown.js"></script>
+  <script src="../lib/settings.js"></script>
+  <script src="../i18n/i18n.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

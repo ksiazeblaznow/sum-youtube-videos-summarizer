@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Sum. Summarize videos on YouTube™ with AI",
+  "version": "0.1.0",
+  "description": "Summarizes videos on YouTube™ with convenient button. Can ask further questions.",
+  "permissions": [ "storage" ],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://openrouter.ai/*",
+    "https://api.anthropic.com/*",
+    "https://api.openai.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "*://*.youtube.com/*" ],
+      "js": [ "content/transcript-bridge.js" ],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [ "*://*.youtube.com/*" ],
+      "js": [
+        "lib/markdown.js",
+        "lib/settings.js",
+        "i18n/i18n.js",
+        "content/panel.js",
+        "content/inject-button.js"
+      ],
+      "css": [ "content/panel.css" ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_page": "options/options.html",
+  "action": {
+    "default_title": "Sum. Settings.",
+    "default_popup": "options/options.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
